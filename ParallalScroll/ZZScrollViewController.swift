@@ -10,9 +10,13 @@ import UIKit
 
 class ZZScrollViewController: UIViewController {
 
+    @IBOutlet weak var tableViewlist: UITableView!
+    @IBOutlet weak var viewTop: UIView!
+    @IBOutlet weak var viewBar: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 

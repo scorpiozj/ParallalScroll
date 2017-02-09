@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,11 +90,11 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -146,9 +147,44 @@
                     <view key="view" contentMode="scaleToFill" id="4Ko-Ol-wxI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0F9-Ke-mzk" userLabel="TopView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qtb-e0-0pK" userLabel="BarView">
+                                <rect key="frame" x="0.0" y="264" width="375" height="44"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="itO-Da-Ecr"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YOf-KO-cFV">
+                                <rect key="frame" x="0.0" y="308" width="375" height="359"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="YOf-KO-cFV" firstAttribute="top" secondItem="Qtb-e0-0pK" secondAttribute="bottom" id="9aZ-0J-4mU"/>
+                            <constraint firstItem="0F9-Ke-mzk" firstAttribute="top" secondItem="fRw-hA-WeL" secondAttribute="bottom" id="F7O-sp-ji8"/>
+                            <constraint firstItem="0F9-Ke-mzk" firstAttribute="height" secondItem="4Ko-Ol-wxI" secondAttribute="height" multiplier="0.3" id="GQ1-T6-hbJ"/>
+                            <constraint firstAttribute="trailing" secondItem="YOf-KO-cFV" secondAttribute="trailing" id="Gek-Nv-NgZ"/>
+                            <constraint firstItem="0F9-Ke-mzk" firstAttribute="leading" secondItem="4Ko-Ol-wxI" secondAttribute="leading" id="N4X-v9-tmx"/>
+                            <constraint firstItem="Qtb-e0-0pK" firstAttribute="top" secondItem="0F9-Ke-mzk" secondAttribute="bottom" id="VnW-iT-ill"/>
+                            <constraint firstAttribute="trailing" secondItem="Qtb-e0-0pK" secondAttribute="trailing" id="aPU-vG-9nd"/>
+                            <constraint firstItem="YOf-KO-cFV" firstAttribute="leading" secondItem="4Ko-Ol-wxI" secondAttribute="leading" id="ikf-1R-ozv"/>
+                            <constraint firstAttribute="trailing" secondItem="0F9-Ke-mzk" secondAttribute="trailing" id="oKo-E0-qvM"/>
+                            <constraint firstItem="Qtb-e0-0pK" firstAttribute="leading" secondItem="4Ko-Ol-wxI" secondAttribute="leading" id="vo0-1u-wU8"/>
+                            <constraint firstItem="hFZ-37-A3J" firstAttribute="top" secondItem="YOf-KO-cFV" secondAttribute="bottom" id="yuq-Sy-AnT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Pni-Qt-B4J"/>
+                    <connections>
+                        <outlet property="tableViewlist" destination="YOf-KO-cFV" id="rUJ-ND-uid"/>
+                        <outlet property="viewBar" destination="Qtb-e0-0pK" id="XGj-tn-R6Q"/>
+                        <outlet property="viewTop" destination="0F9-Ke-mzk" id="bk2-KU-KXF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVn-1S-GYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
