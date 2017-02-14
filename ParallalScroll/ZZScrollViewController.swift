@@ -75,9 +75,17 @@ extension ZZScrollViewController: UITableViewDelegate {
 //        ZZDebugLog(object: scrollView)
         goingUp = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
         
-        let statueBarHidden = self.prefersStatusBarHidden
-        let statueBarHeight: CGFloat = statueBarHidden ? 0.0 : -20.0
-        let parentViewMaxContentYOffset = self.scrollParent.contentSize.height - self.scrollParent.frame.height + statueBarHeight
+        var adjustOffset: CGFloat = 0
+        
+        if let barFrame = self.navigationController?.navigationBar.frame{
+            adjustOffset = barFrame.origin.y + barFrame.size.height
+        }
+        else {
+            let statueBarHidden = self.prefersStatusBarHidden
+            adjustOffset = statueBarHidden ? 0.0 : 20.0
+
+        }
+        let parentViewMaxContentYOffset = self.scrollParent.contentSize.height - self.scrollParent.frame.height - adjustOffset
         
         if goingUp! {
             if scrollView == self.tableViewlist {
