@@ -8,6 +8,15 @@
 
 import UIKit
 
+extension UIScrollView {
+    func isScrollToBottom() -> Bool {
+        let contentHeight: CGFloat = self.contentOffset.y + self.frame.size.height
+        let contentSizeHeight = self.contentSize.height
+        return contentHeight >= contentSizeHeight
+    }
+}
+
+
 class ZZScrollViewController: UIViewController {
 
     @IBOutlet weak var tableViewlist: UITableView!
@@ -18,6 +27,7 @@ class ZZScrollViewController: UIViewController {
     var goingUp: Bool?
     var childScrollingDownDueToParent = false
     
+    let kScrollOffsetHeight: CGFloat  = 40.0
     
     let arrayTableData = ["Bean", "Roy",  "Beard", "Charles A. Beaumont and Fletcher", "Beck", "Glenn", "Becker", "Carl", "Beckett", "Samuel", "Beddoes", "Mick", "Beecher", "Henry Ward", "Beethoven", "Ludwig van", "Bean", "Roy",  "Beard", "Charles A. Beaumont and Fletcher", "Beck", "Glenn", "Becker", "Carl", "Beckett", "Samuel", "Beddoes", "Mick", "Beecher", "Henry Ward", "Beethoven", "Ludwig van"]
     
@@ -29,7 +39,22 @@ class ZZScrollViewController: UIViewController {
         self.tableViewlist.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         self.scrollParent.delegate = self
-        // Do any additional setup after loading the view.
+        
+//        self.navigationController?.navigationBar.barTintColor = UIColor.red
+//        self.title = "Test"
+//        self.navigationController?.navigationBar.backgroundColor = UIColor.blue
+        
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(), for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
+        
+        self.navigationController?.navigationBar.lt_setBackgroundColor(backgroundColor: UIColor.clear)
+        self.navigationController?.navigationBar.shadowImage = UIImage.init()
+
+        self.view.backgroundColor = UIColor.blue
+        self.scrollParent.backgroundColor = UIColor.cyan
+        
+        self.scrollParent.delaysContentTouches = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,7 +78,18 @@ class ZZScrollViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    //MARK: Private
+    func addNavItems(){
+        let leftItem = UIBarButtonItem.init(title: "Left", style: UIBarButtonItemStyle.plain, target: self, action: #selector(test(_:)))
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let rightItem = UIBarButtonItem.init(title: "Righ", style: UIBarButtonItemStyle.done, target: self, action: #selector(test(_:)))
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+    }
+    func test(_ sender: Any){
+        
+    }
 }
 
 extension ZZScrollViewController: UITableViewDataSource {
@@ -68,11 +104,12 @@ extension ZZScrollViewController: UITableViewDataSource {
         return cell
     }
 }
-
+//MARK: UITableViewDelegate
 extension ZZScrollViewController: UITableViewDelegate {
-    //MARK: Scroll
+    
     public func scrollViewDidScroll(_ scrollView: UIScrollView){
 //        ZZDebugLog(object: scrollView)
+        
         goingUp = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
         
         var adjustOffset: CGFloat = 0
@@ -83,16 +120,28 @@ extension ZZScrollViewController: UITableViewDelegate {
         else {
             let statueBarHidden = self.prefersStatusBarHidden
             adjustOffset = statueBarHidden ? 0.0 : 20.0
-
         }
         let parentViewMaxContentYOffset = self.scrollParent.contentSize.height - self.scrollParent.frame.height - adjustOffset
         
         if goingUp! {
+            ZZDebugLog(object: NSString.init(format: "scrollOffset=%@, tableviewOffset=%@", NSStringFromCGPoint(self.scrollParent.contentOffset), NSStringFromCGPoint(self.tableViewlist.contentOffset)))
             if scrollView == self.tableViewlist {
                 if self.scrollParent.contentOffset.y < parentViewMaxContentYOffset && !childScrollingDownDueToParent {
                     self.scrollParent.contentOffset.y = max(min(self.scrollParent.contentOffset.y + self.tableViewlist.contentOffset.y , parentViewMaxContentYOffset), 0)
                     self.tableViewlist.contentOffset.y = 0
                     
+                }
+            }
+            
+            if scrollView == self.scrollParent {
+                if self.scrollParent.contentOffset.y > parentViewMaxContentYOffset {
+                    self.scrollParent.contentOffset.y = parentViewMaxContentYOffset
+                    
+                    self.scrollParent.isScrollEnabled = false
+                }
+                if self.tableViewlist.isScrollToBottom() {
+                    ZZDebugLog(object: "")
+                    self.scrollParent.isScrollEnabled = false
                 }
             }
         }
@@ -112,7 +161,32 @@ extension ZZScrollViewController: UITableViewDelegate {
                 }
             }
         }
+        
+        let navColor = UIColor.white//UIColor.init(colorLiteralRed: 0.0, green: 175.0/255.0, blue: 240.0/255.0, alpha: 1)
+        let parentOffset = self.scrollParent.contentOffset.y
+        var colorAlpha: CGFloat = 0.0
+        if parentOffset > kScrollOffsetHeight {
+            colorAlpha = min(1, 1 - ((kScrollOffsetHeight + 64 - parentOffset)/64))
+        }
+        self.navigationController?.navigationBar.lt_setBackgroundColor(backgroundColor: navColor.withAlphaComponent(colorAlpha))
+        if colorAlpha > 0.5 {
+            self.addNavItems()
+        }
+        else {
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
-    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        ZZDebugLog(object: "Decelerating")
+        if self.tableViewlist.isScrollToBottom() {
+            ZZDebugLog(object: "")
+            self.scrollParent.isScrollEnabled = false
+        }
+        else {
+            self.scrollParent.isScrollEnabled = true
+        }
+        
+    }
     
 }

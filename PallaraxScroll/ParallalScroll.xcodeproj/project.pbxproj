@@ -16,6 +16,7 @@
 		DE91D2151E46190200225D78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE91D2131E46190200225D78 /* LaunchScreen.storyboard */; };
 		DE91D2201E46190300225D78 /* ParallalScrollUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE91D21F1E46190300225D78 /* ParallalScrollUITests.swift */; };
 		DE91D22B1E461B1F00225D78 /* ZZScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE91D22A1E461B1E00225D78 /* ZZScrollViewController.swift */; };
+		DEE5ADE61E600C28009D01C4 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE5ADE51E600C28009D01C4 /* UINavigationBarExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		DE91D21F1E46190300225D78 /* ParallalScrollUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallalScrollUITests.swift; sourceTree = "<group>"; };
 		DE91D2211E46190300225D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE91D22A1E461B1E00225D78 /* ZZScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZZScrollViewController.swift; sourceTree = "<group>"; };
+		DEE5ADE51E600C28009D01C4 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,9 +91,10 @@
 				DE91D20E1E46190200225D78 /* Main.storyboard */,
 				DE91D2111E46190200225D78 /* Assets.xcassets */,
 				DE91D2131E46190200225D78 /* LaunchScreen.storyboard */,
-				DE91D2161E46190200225D78 /* Info.plist */,
+				DEE5ADE51E600C28009D01C4 /* UINavigationBarExtension.swift */,
 				DE91D22A1E461B1E00225D78 /* ZZScrollViewController.swift */,
 				DE4349261E4C329000CF8A82 /* Constants.swift */,
+				DE91D2161E46190200225D78 /* Info.plist */,
 			);
 			path = ParallalScroll;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				TargetAttributes = {
 					DE91D2041E46190200225D78 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = PCZ5N3UZ3X;
 						ProvisioningStyle = Automatic;
 					};
 					DE91D21A1E46190300225D78 = {
@@ -211,6 +215,7 @@
 				DE4349271E4C329000CF8A82 /* Constants.swift in Sources */,
 				DE91D20D1E46190200225D78 /* DetailViewController.swift in Sources */,
 				DE91D22B1E461B1F00225D78 /* ZZScrollViewController.swift in Sources */,
+				DEE5ADE61E600C28009D01C4 /* UINavigationBarExtension.swift in Sources */,
 				DE91D20B1E46190200225D78 /* MasterViewController.swift in Sources */,
 				DE91D2091E46190200225D78 /* AppDelegate.swift in Sources */,
 			);
@@ -349,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PCZ5N3UZ3X;
 				INFOPLIST_FILE = ParallalScroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -362,6 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PCZ5N3UZ3X;
 				INFOPLIST_FILE = ParallalScroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
